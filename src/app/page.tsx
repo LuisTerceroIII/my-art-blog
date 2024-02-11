@@ -1,12 +1,18 @@
 "use client"
 import { MainArticlesFeed } from "@/components/main-articles-feed";
 import { colors } from "@/theme/colors";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion"
+import { StyleSheet, css } from 'aphrodite'
+
+
+const styles = StyleSheet.create({
+
+})
 
 export default function Home() {
 
 	const [articles, setArticles] = useState([])
-	console.log("🚀 ~ Home ~ articles:", JSON.stringify(articles))
 
 	useEffect(() => {
 		const fetchArticles = async () => {
@@ -23,8 +29,9 @@ export default function Home() {
 		})
 	} */
 
+
 	return (
-		<main style={{ backgroundColor: colors.softGrey }}>
+		<main style={{ backgroundColor: colors.background }}>
 			{/* <button onClick={postNewArticle}> POST SAVED</button> */}
 			<MainArticlesFeed articles={articles}/>
 		</main>
