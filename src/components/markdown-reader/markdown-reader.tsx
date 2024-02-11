@@ -36,7 +36,7 @@ const MarkdownReader: FC<MarkdownReaderProps> = ({ markdownUrl, styles }) => {
 	}, [])
 
 	return (
-		<div className={css(aphrodite.container)}>
+		<div className={css(aphrodite.container)} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
 			<ReactMarkdown remarkPlugins={[remarkGfm]}>{markdownContent}</ReactMarkdown>
 		</div>
 	)
