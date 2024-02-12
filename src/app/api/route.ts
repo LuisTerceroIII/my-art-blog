@@ -1,6 +1,7 @@
 import { addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
 import { Article, ArticleState } from "@/types/types";
+import { NextResponse } from "next/server";
 
 export async function GET() {
 	const articlesRef = collection(db, "articles")
@@ -15,7 +16,7 @@ export async function GET() {
 		state: doc.data()?.state,
 		main_photo_url: doc.data()?.main_photo_url
 	}))
-	return Response.json(data)
+	return NextResponse.json(data)
 }
 
 //articles/z7N9PDPdk10f19juqkAT/EqoxJwj9GJjDMerCO3JA
