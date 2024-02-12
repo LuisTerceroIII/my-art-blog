@@ -1,22 +1,16 @@
 "use client"
 import { MainArticlesFeed } from "@/components/main-articles-feed";
 import { colors } from "@/theme/colors";
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useSpring } from "framer-motion"
-import { StyleSheet, css } from 'aphrodite'
+import { useEffect, useState } from "react";
 
-
-const styles = StyleSheet.create({
-
-})
-
+const mainURL = "http://localhost:3000/api"
 export default function Home() {
 
 	const [articles, setArticles] = useState([])
 
 	useEffect(() => {
 		const fetchArticles = async () => {
-			const res = await fetch('http://localhost:3000/api')
+			const res = await fetch(mainURL)
 			const data = await res.json()
 			setArticles(data)
 		}

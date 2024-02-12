@@ -4,7 +4,7 @@ import React, { FC, useRef, useState } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { ArticleCard } from './article-card/article-card'
 import { Article } from '@/types/types'
-import { motion, useScroll, useSpring } from "framer-motion"
+import { motion } from "framer-motion"
 import { colors } from '@/theme/colors'
 
 interface FeedArticlesProps {
@@ -40,6 +40,11 @@ const styles = StyleSheet.create({
 		top: 50,
 		right: 50,
 		color: colors.black,
+		"@media(max-width: 900px)": {
+			fontSize: 45,
+			right: 20,
+
+		}
 	}
 })
 

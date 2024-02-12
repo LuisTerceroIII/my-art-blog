@@ -1,6 +1,6 @@
 import { Article } from '@/types/types'
 import { StyleSheet, css } from 'aphrodite'
-import React, { CSSProperties, FC, useState } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { motion, useScroll, useSpring } from "framer-motion"
 import { colors } from '@/theme/colors'
 import MarkdownReader, { MarkdownAphroditeProps } from '../markdown-reader/markdown-reader'
@@ -21,21 +21,40 @@ const styles = StyleSheet.create({
         display: "flex",
 		transition: "all 500ms",
         ":focus": {
-            transform: "scale(1.4)",
+            transform: "scale(1.3)",
+        },
+        "@media(max-width: 900px)": {
+            ":focus": {
+                transform: "scale(1)",
+            },
         }
+
     },
     scaleUp: {
 		transition: "all 500ms",
         ":hover" : {
-            transform: "scale(1.4)",
+            transform: "scale(1.3)",
             zIndex: 3
         },
+        "@media(max-width: 900px)": {
+            ":hover" : {
+                transform: "scale(1.2)"
+            }
+        }
     },
     selectedMainContainer: {
         width: 700,
         height: 500,
         zIndex: 5,
-        borderRadius: 20
+        borderRadius: 20,
+        "@media(max-width: 900px)": {
+            display:"flex",
+            flexDirection: "column",
+            width: 324,
+            height: 500,
+            overflow: "auto",
+            transform: "scale(1)",
+        }
     },
     image: {
 		width: 300,
@@ -53,6 +72,12 @@ const styles = StyleSheet.create({
         width: 250,
         borderTopLeftRadius: 12,
         borderBottomLeftRadius: 12,
+        "@media(max-width: 900px)": {
+            width: 324,
+            height: 150,
+            borderBottomLeftRadius: 0,
+            transform: "scale(1)"
+        }
     },
     contentContainer: {
 		width: 400,
@@ -60,6 +85,13 @@ const styles = StyleSheet.create({
         overflowY: "auto",
         borderTopRightRadius: 12,
         borderBottomRightRadius: 12,
+        "@media(max-width: 900px)": {
+            width: 324,
+            height: 400,
+            borderBottomLeftRadius: 12,
+            borderBottomRightRadius: 12,
+            borderTopRightRadius: 0
+        }
     },
     title: {
         fontSize: 20,
@@ -112,8 +144,6 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
     
     const { article, isSelected, onClick, onBlur, someIsSelected, containerStyle } = props
 
-    const [imageIsHover, setImageIsHover] = useState(false)
-
     const contentRef = React.useRef<HTMLDivElement>(null)
 
     const { scrollYProgress } = useScroll({container: contentRef})
@@ -123,21 +153,14 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
         restDelta: 0.001
     })
 
-    const handleImageHover = (e: any) => {
-        setImageIsHover(true)
-    }
-    const handleImageBlur = (e: any) => {
-        setImageIsHover(false)
-    }
-
     return (
-        <div style={containerStyle} className={css(styles.mainContainer, isSelected && styles.selectedMainContainer, !someIsSelected && styles.scaleUp)} onClick={onClick} tabIndex={1} onBlur={onBlur}>
+        <motion.div style={containerStyle} className={css(styles.mainContainer, isSelected && styles.selectedMainContainer, !someIsSelected && styles.scaleUp)} onClick={onClick} tabIndex={1} onBlur={onBlur}>
             {isSelected ? (
-                <motion.img onHoverStart={handleImageHover} onHoverEnd={handleImageBlur} src={article.main_photo_url} alt={article.title} className={css(styles.image, isSelected && styles.imageSelected, (!someIsSelected && !isSelected ) && styles.scaleUp )}/>
+                <motion.img src={article.main_photo_url} alt={article.title} className={css(styles.image, isSelected && styles.imageSelected, (!someIsSelected && !isSelected ) && styles.scaleUp )}/>
             ) : (
-                <motion.div className={css(styles.scaleUp)} style={{position: "relative", zIndex: 2}} onHoverStart={handleImageHover} onHoverEnd={handleImageBlur} >
+                <motion.div className={css(styles.scaleUp)} style={{position: "relative", zIndex: 2}}>
                     <motion.img src={article.main_photo_url} alt={article.title} className={css(styles.image, styles.scaleUp)}/>
-                    <p className={css(imageIsHover ? styles.imageTitle : styles.invisible)}>{article?.title}</p>
+                    <p className={css(styles.imageTitle)}>{article?.title}</p>
                 </motion.div>
             )}
             <section ref={contentRef} className={css(isSelected ? styles.contentContainer : styles.invisible)}>
@@ -147,6 +170,6 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                     <MarkdownReader markdownUrl={article.contentFile?.url || ""} styles={markdownStyles}/>
                 </div>
             </section>
-        </div>
+        </motion.div>
     )
 }
