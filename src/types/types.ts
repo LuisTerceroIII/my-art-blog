@@ -23,3 +23,9 @@ export interface Article {
     state: ArticleState
     main_photo_url?: string
 }
+export enum FetchState {
+    IDLE = "IDLE",
+    LOADING = "LOADING",
+    SUCCESS = "SUCCESS",
+    ERROR = "ERROR"
+}

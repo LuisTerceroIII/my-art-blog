@@ -1,18 +1,27 @@
 "use client"
+
+import { Loader } from "@/components/loader/loader";
 import { MainArticlesFeed } from "@/components/main-articles-feed";
 import { colors } from "@/theme/colors";
+import { FetchState } from "@/types/types";
 import { useEffect, useState } from "react";
 
-const mainURL = "http://localhost:3000/api"
+const mainURL = "/api"
 export default function Home() {
 
 	const [articles, setArticles] = useState([])
+	const [fetchState, setFetchState] = useState(FetchState.IDLE)
 
 	useEffect(() => {
 		const fetchArticles = async () => {
+			setFetchState(FetchState.LOADING)
 			const res = await fetch(mainURL)
-			const data = await res.json()
-			setArticles(data)
+			if (res.ok) {
+				const data = await res.json()
+				setArticles(data)
+				setFetchState(FetchState.SUCCESS)
+			} else setFetchState(FetchState.ERROR)
+			console.log(fetchState)
 		}
 		fetchArticles()
 	},[])
@@ -27,7 +36,7 @@ export default function Home() {
 	return (
 		<main style={{ backgroundColor: colors.background }}>
 			{/* <button onClick={postNewArticle}> POST SAVED</button> */}
-			<MainArticlesFeed articles={articles}/>
+			<MainArticlesFeed articles={articles} fetchState={fetchState} />
 		</main>
 	);
 }

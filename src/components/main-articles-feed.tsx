@@ -3,12 +3,14 @@
 import React, { FC, useRef, useState } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { ArticleCard } from './article-card/article-card'
-import { Article } from '@/types/types'
+import { Article, FetchState } from '@/types/types'
 import { motion } from "framer-motion"
 import { colors } from '@/theme/colors'
+import { Loader } from './loader/loader'
 
 interface FeedArticlesProps {
 	articles: Article[]
+	fetchState: FetchState
 }
 
 const styles = StyleSheet.create({
@@ -50,7 +52,8 @@ const styles = StyleSheet.create({
 
 export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 
-	const { articles } = props
+	const { articles, fetchState } = props
+	const isLoading = fetchState === FetchState.LOADING
 	const contentRef = useRef<HTMLDivElement>(null)
 
 	const [focusedIndex, setFocusedIndex] = useState(-1)
@@ -63,16 +66,18 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 		<motion.div ref={contentRef} className={css(styles.horizontalScrollContainer)} >
 			<h1 className={css(styles.title)}>Folium Ater</h1>
 
-			<motion.div className={css(styles.horizontalScroll)}>
-			{articles.map((article, index) => (
-					<ArticleCard 
-						key={article.id} 
-						onClick={() => handleFocusChange(index)}
-						onBlur={() => handleFocusChange(-1)}
-						isSelected={index === focusedIndex} 
-						article={article} 
-						someIsSelected={focusedIndex > -1}/>
-				))}
+			<motion.div className={css(styles.horizontalScroll)} style={{width: isLoading ? '100%' : undefined}}>
+				{ isLoading ? <Loader style={{alignSelf: "center"}} /> : 
+				articles.map((article, index) => (
+						<ArticleCard 
+							key={article.id} 
+							onClick={() => handleFocusChange(index)}
+							onBlur={() => handleFocusChange(-1)}
+							isSelected={index === focusedIndex} 
+							article={article} 
+							someIsSelected={focusedIndex > -1}/>
+					))
+				}
 			</motion.div>
 		</motion.div>
 	) 
