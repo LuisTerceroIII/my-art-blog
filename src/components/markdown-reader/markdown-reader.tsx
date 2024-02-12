@@ -1,23 +1,16 @@
 "use client"
-
-import { StyleDeclaration, StyleSheet, css } from 'aphrodite'
 import React, { useState, useEffect, FC } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 
-export interface MarkdownAphroditeProps {
-	container: StyleDeclaration
-}
 interface MarkdownReaderProps {
 	markdownUrl: string
-	styles?: MarkdownAphroditeProps
+	classes?: string
 }
 
-const MarkdownReader: FC<MarkdownReaderProps> = ({ markdownUrl, styles }) => {
+const MarkdownReader: FC<MarkdownReaderProps> = ({ markdownUrl, classes }) => {
 
 	const [markdownContent, setMarkdownContent] = useState('')
-	
-	const aphrodite = StyleSheet.create({...styles})
 
 	useEffect(() => {
 		const fetchMarkdown = async () => {
@@ -36,7 +29,7 @@ const MarkdownReader: FC<MarkdownReaderProps> = ({ markdownUrl, styles }) => {
 	}, [markdownUrl])
 
 	return (
-		<div className={css(aphrodite.container)} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+		<div className={`${classes}`} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
 			<ReactMarkdown remarkPlugins={[remarkGfm]}>{markdownContent}</ReactMarkdown>
 		</div>
 	)

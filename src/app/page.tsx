@@ -1,6 +1,6 @@
 "use client"
 
-import { MainArticlesFeed } from "@/components/main-articles-feed";
+import { MainArticlesFeed } from "@/components/main-articles-feed/main-articles-feed";
 import { colors } from "@/theme/colors";
 
 export default function Home() {

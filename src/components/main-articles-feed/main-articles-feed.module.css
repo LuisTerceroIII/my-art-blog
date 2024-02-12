@@ -1,0 +1,39 @@
+.horizontalScrollContainer {
+	display: flex;
+	width: 100%;
+	overflow-x: auto;
+	height: 100svh;
+}
+
+.horizontalScroll {
+	display: flex;
+	align-self: center;
+	justify-content: center;
+	align-items: center;
+	padding: 0 30%;
+}
+
+.progressBar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 5px;
+	background: #F1D302;
+	transform-origin: 0%;
+}
+
+.title {
+	font-size: 85px;
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	color: #0F1A20;
+}
+
+@media(max-width: 900px) {
+	.title {
+		font-size: 45px;
+		right: 20px;
+	}
+}

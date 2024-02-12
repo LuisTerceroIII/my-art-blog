@@ -1,9 +1,8 @@
 import { Article } from '@/types/types'
-import { StyleSheet, css } from 'aphrodite'
 import React, { CSSProperties, FC } from 'react'
 import { motion, useScroll, useSpring } from "framer-motion"
-import { colors } from '@/theme/colors'
-import MarkdownReader, { MarkdownAphroditeProps } from '../markdown-reader/markdown-reader'
+import MarkdownReader from '../markdown-reader/markdown-reader'
+import styles from "./article-card.module.css"
 
 export interface ArticleCardProps {
     article: Article
@@ -12,131 +11,6 @@ export interface ArticleCardProps {
     onBlur(): void
     someIsSelected: boolean
     containerStyle?: CSSProperties
-}
-
-const styles = StyleSheet.create({
-    mainContainer: {
-        width: 200,
-        borderRadius: 20,
-        display: "flex",
-		transition: "all 500ms",
-        ":focus": {
-            transform: "scale(1.3)",
-        },
-        "@media(max-width: 900px)": {
-            ":focus": {
-                transform: "scale(1)",
-            },
-        }
-
-    },
-    scaleUp: {
-		transition: "all 500ms",
-        ":hover" : {
-            transform: "scale(1.3)",
-            zIndex: 3
-        },
-        "@media(max-width: 900px)": {
-            ":hover" : {
-                transform: "scale(1.2)"
-            }
-        }
-    },
-    selectedMainContainer: {
-        width: 700,
-        height: 500,
-        zIndex: 5,
-        borderRadius: 20,
-        "@media(max-width: 900px)": {
-            display:"flex",
-            flexDirection: "column",
-            width: 324,
-            height: 500,
-            overflow: "auto",
-            transform: "scale(1)",
-        }
-    },
-    image: {
-		width: 300,
-        height: "auto",
-        objectFit: "cover",
-		cursor: "pointer",
-		transition: "all 500ms",
-        filter: "grayscale(100%)",
-        ":hover": {
-            filter: "grayscale(0%)",
-        }
-    },
-    imageSelected: {
-        filter: "grayscale(0%)",
-        width: 250,
-        borderTopLeftRadius: 12,
-        borderBottomLeftRadius: 12,
-        "@media(max-width: 900px)": {
-            width: 324,
-            height: 150,
-            borderBottomLeftRadius: 0,
-            transform: "scale(1)"
-        }
-    },
-    contentContainer: {
-		width: 400,
-        backgroundColor: colors.white,
-        overflowY: "auto",
-        borderTopRightRadius: 12,
-        borderBottomRightRadius: 12,
-        "@media(max-width: 900px)": {
-            width: 324,
-            height: 400,
-            borderBottomLeftRadius: 12,
-            borderBottomRightRadius: 12,
-            borderTopRightRadius: 0
-        }
-    },
-    title: {
-        fontSize: 20,
-        color: colors.black,
-        marginTop: 30,
-        paddingLeft: 20,
-        paddingRight: 20,
-    },
-    imageTitle: {
-        position: "absolute",
-        bottom: -30,
-        textAlign: "center",
-        fontSize: 18,
-        color: colors.white,
-        zIndex: 2,
-        textShadow: `0px 2px 2px ${colors.hardGrey}`
-    },
-    content: {
-        fontSize: 12,
-        padding: "0 18px 20px 18px",
-        color: "black",
-        marginTop: 20,
-        textAlign: "center",
-    },
-    invisible: {
-        display: "none"
-    },
-    progressBar: {
-        position: 'sticky',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 5,
-        background: colors.yellow,
-        transformOrigin: '0%',
-      }
-})
-
-const markdownStyles: MarkdownAphroditeProps = {
-    container: {
-        color: colors.black,
-        fontSize: 11,
-        lineHeight: 1.9,
-        padding: "20px"
-    }
 }
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
@@ -154,20 +28,20 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
     })
 
     return (
-        <motion.div style={containerStyle} className={css(styles.mainContainer, isSelected && styles.selectedMainContainer, !someIsSelected && styles.scaleUp)} onClick={onClick} tabIndex={1} onBlur={onBlur}>
+        <motion.div style={containerStyle} className={`${styles.mainContainer} ${isSelected && styles.selectedMainContainer} ${!someIsSelected && styles.scaleUp}`} onClick={onClick} tabIndex={1} onBlur={onBlur}>
             {isSelected ? (
-                <motion.img src={article.main_photo_url} alt={article.title} className={css(styles.image, isSelected && styles.imageSelected, (!someIsSelected && !isSelected ) && styles.scaleUp )}/>
+                <motion.img src={article.main_photo_url} alt={article.title} className={`${styles.image} ${isSelected && styles.imageSelected} ${!someIsSelected && !isSelected && styles.scaleUp}`}/>
             ) : (
-                <motion.div className={css(styles.scaleUp)} style={{position: "relative", zIndex: 2}}>
-                    <motion.img src={article.main_photo_url} alt={article.title} className={css(styles.image, styles.scaleUp)}/>
-                    <p className={css(styles.imageTitle)}>{article?.title}</p>
+                <motion.div className={styles.scaleUp} style={{position: "relative", zIndex: 2}}>
+                    <motion.img src={article.main_photo_url} alt={article.title} className={`${styles.image} ${styles.scaleUp}`}/>
+                    <p className={styles.imageTitle}>{article?.title}</p>
                 </motion.div>
             )}
-            <section ref={contentRef} className={css(isSelected ? styles.contentContainer : styles.invisible)}>
-                <motion.div style={{scaleX}} className={css(styles.progressBar)} />
-                <p className={css(styles.title)}>{article.title}</p>
+            <section ref={contentRef} className={isSelected ? styles.contentContainer : styles.invisible}>
+                <motion.div style={{scaleX}} className={styles.progressBar} />
+                <p className={styles.title}>{article.title}</p>
                 <div style={{position: "relative"}}>
-                    <MarkdownReader markdownUrl={article.contentFile?.url || ""} styles={markdownStyles}/>
+                    <MarkdownReader markdownUrl={article.contentFile?.url || ""} classes={styles.markdownContainer}/>
                 </div>
             </section>
         </motion.div>
