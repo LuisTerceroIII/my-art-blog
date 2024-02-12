@@ -7,7 +7,7 @@ export async function GET() {
 	const q = query(articlesRef, orderBy("publishedDate", "desc"), where("author.id", "==", "z7N9PDPdk10f19juqkAT"))
 	const querySnapshot = await getDocs(q)
 	const data: Article[] = querySnapshot?.docs?.map((doc) => ({
-		id: doc.data()?.id,
+		id: doc?.id,
 		title: doc.data()?.title,
 		contentFile: doc.data()?.contentFile,
 		publishedDate: doc.data()?.publishedDate,
