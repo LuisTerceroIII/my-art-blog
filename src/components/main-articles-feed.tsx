@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { ArticleCard } from './article-card/article-card'
 import { Article, FetchState } from '@/types/types'
@@ -9,8 +9,6 @@ import { colors } from '@/theme/colors'
 import { Loader } from './loader/loader'
 
 interface FeedArticlesProps {
-	articles: Article[]
-	fetchState: FetchState
 }
 
 const styles = StyleSheet.create({
@@ -45,32 +43,46 @@ const styles = StyleSheet.create({
 		"@media(max-width: 900px)": {
 			fontSize: 45,
 			right: 20,
-
 		}
 	}
 })
 
+const mainURL = "/api"
+
 export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 
-	const { articles, fetchState } = props
-	const isLoading = fetchState === FetchState.LOADING
-	const contentRef = useRef<HTMLDivElement>(null)
-
+	const [articles, setArticles] = useState([])
+	const [fetchState, setFetchState] = useState(FetchState.IDLE)
 	const [focusedIndex, setFocusedIndex] = useState(-1)
+
+	const contentRef = useRef<HTMLDivElement>(null)
+	const isLoading = fetchState === FetchState.LOADING
 
 	const handleFocusChange = (index: number) => {
 		setFocusedIndex(index === focusedIndex ? -1 : index)
 	}
 
+	useEffect(() => {
+		const fetchArticles = async () => {
+			setFetchState(FetchState.LOADING)
+			const res = await fetch(mainURL)
+			if (res.ok) {
+				const data = await res.json()
+				setArticles(data)
+				setFetchState(FetchState.SUCCESS)
+			} else setFetchState(FetchState.ERROR)
+		}
+		fetchArticles()
+	},[])
+
 	return (
 		<motion.div ref={contentRef} className={css(styles.horizontalScrollContainer)} >
 			<h1 className={css(styles.title)}>Folium Ater</h1>
-
 			<motion.div className={css(styles.horizontalScroll)} style={{width: isLoading ? '100%' : undefined}}>
 				{ isLoading ? <Loader style={{alignSelf: "center"}} /> : 
-				articles.map((article, index) => (
+				articles.map((article: Article, index: number) => (
 						<ArticleCard 
-							key={article.id} 
+							key={article?.id} 
 							onClick={() => handleFocusChange(index)}
 							onBlur={() => handleFocusChange(-1)}
 							isSelected={index === focusedIndex} 

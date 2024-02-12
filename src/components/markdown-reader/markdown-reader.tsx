@@ -33,7 +33,7 @@ const MarkdownReader: FC<MarkdownReaderProps> = ({ markdownUrl, styles }) => {
 			}
 		}
 		fetchMarkdown()
-	}, [])
+	}, [markdownUrl])
 
 	return (
 		<div className={css(aphrodite.container)} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
