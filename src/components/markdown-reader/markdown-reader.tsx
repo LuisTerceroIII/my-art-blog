@@ -2,6 +2,11 @@
 import React, { useState, useEffect, FC } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
+import rehypeRaw from 'rehype-raw'
+import remarkDirective from 'remark-directive'
+
+//@ts-ignore
+import remarkUtf8 from "remark-utf8"
 
 interface MarkdownReaderProps {
 	markdownUrl: string
@@ -29,8 +34,8 @@ const MarkdownReader: FC<MarkdownReaderProps> = ({ markdownUrl, classes }) => {
 	}, [markdownUrl])
 
 	return (
-		<div className={`${classes}`} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-			<ReactMarkdown remarkPlugins={[remarkGfm]}>{markdownContent}</ReactMarkdown>
+		<div className={`${classes}`} style={{ display: "flex", flexDirection: "column", gap: 18, zIndex: 1 }}>
+			<ReactMarkdown remarkPlugins={[remarkGfm,remarkDirective, remarkUtf8]} rehypePlugins={[rehypeRaw]}>{markdownContent}</ReactMarkdown>
 		</div>
 	)
 }

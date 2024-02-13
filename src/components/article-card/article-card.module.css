@@ -124,11 +124,11 @@
     height: 5px;
     background: #F1D302;
     transform-origin: 0%;
+    z-index: 20;
 }
 .markdownContainer {
     color: #0F1A20;
     font-size: 14px;
     line-height: 1.9;
     padding: 20px;
-    
 }
