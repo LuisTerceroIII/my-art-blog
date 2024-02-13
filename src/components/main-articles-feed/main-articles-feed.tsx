@@ -11,29 +11,49 @@ const mainURL = "/api"
 
 export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 
-	const [articles, setArticles] = useState([])
+	const [articles, setArticles] = useState<Article[]>([])
+	const [cursorId, setCursorId] = useState(null)
+	const [initFetchState, setInitFetchState] = useState(FetchState.IDLE)
 	const [fetchState, setFetchState] = useState(FetchState.IDLE)
 	const [focusedIndex, setFocusedIndex] = useState(-1)
+	const [lastArticleInViewport, setLastArticuleInViewport] = useState(false)
 
 	const contentRef = useRef<HTMLDivElement>(null)
-	const isLoading = fetchState === FetchState.LOADING
+	const isLoading = initFetchState === FetchState.LOADING
 
 	const handleFocusChange = (index: number) => {
 		setFocusedIndex(index === focusedIndex ? -1 : index)
 	}
-
+	
 	useEffect(() => {
 		const fetchArticles = async () => {
-			setFetchState(FetchState.LOADING)
+			setInitFetchState(FetchState.LOADING)
 			const res = await fetch(mainURL)
 			if (res.ok) {
 				const data = await res.json()
 				setArticles(data)
-				setFetchState(FetchState.SUCCESS)
-			} else setFetchState(FetchState.ERROR)
+				setCursorId(data[data?.length-1]?.id)
+				setInitFetchState(FetchState.SUCCESS)
+			} else setInitFetchState(FetchState.ERROR)
 		}
 		fetchArticles()
 	}, [])
+
+	useEffect(() => {
+		const loadMoreArticles = async () => {
+			if(!lastArticleInViewport) return
+			if(cursorId == null) return
+			setFetchState(FetchState.LOADING)
+			const res = await fetch(`${mainURL}?cursorId=${cursorId}`)
+			if (res.ok) {
+				const data = await res.json()
+				setArticles([...articles, ...data])
+				setCursorId(data[data?.length -1]?.id)
+				setFetchState(FetchState.SUCCESS)
+			} else setFetchState(FetchState.ERROR)
+		}
+		loadMoreArticles()
+	}, [lastArticleInViewport])
 
 	return (
 		<motion.div ref={contentRef} className={styles.horizontalScrollContainer} >
@@ -47,9 +67,13 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 							onBlur={() => handleFocusChange(-1)}
 							isSelected={index === focusedIndex}
 							article={article}
-							someIsSelected={focusedIndex > -1} />
+							someIsSelected={focusedIndex > -1} 
+							setLastArticleInViewport={setLastArticuleInViewport}
+							isLast={articles?.length-1 === index}
+							/>
 					))
 				}
+				{fetchState === FetchState.LOADING && <Loader style={{ marginLeft: 16}} />}
 			</motion.div>
 		</motion.div>
 	)

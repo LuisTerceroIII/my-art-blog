@@ -11,12 +11,14 @@ export interface ArticleCardProps {
     onBlur(): void
     someIsSelected: boolean
     containerStyle?: CSSProperties
+    setLastArticleInViewport?(b:boolean): void
+    isLast?: boolean
 }
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
 
     
-    const { article, isSelected, onClick, onBlur, someIsSelected, containerStyle } = props
+    const { article, isSelected, onClick, onBlur, someIsSelected, containerStyle, setLastArticleInViewport=(b:boolean)=>null, isLast=false } = props
 
     const contentRef = React.useRef<HTMLDivElement>(null)
 
@@ -28,7 +30,16 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
     })
 
     return (
-        <motion.div style={containerStyle} className={`${styles.mainContainer} ${isSelected && styles.selectedMainContainer} ${!someIsSelected && styles.scaleUp}`} onClick={onClick} tabIndex={1} onBlur={onBlur}>
+        <motion.div 
+            style={containerStyle} 
+            className={`${styles.mainContainer} ${isSelected && styles.selectedMainContainer} ${!someIsSelected && styles.scaleUp}`} 
+            onClick={onClick} 
+            tabIndex={1} 
+            onBlur={onBlur}
+            onViewportEnter={() => {
+                console.log("ENTERING", {isLast}, article.title)
+                setLastArticleInViewport(isLast)
+            }}>
             {isSelected ? (
                 <motion.img src={article.main_photo_url} alt={article.title} className={`${styles.image} ${isSelected && styles.imageSelected} ${!someIsSelected && !isSelected && styles.scaleUp}`}/>
             ) : (

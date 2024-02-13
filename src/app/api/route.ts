@@ -1,11 +1,19 @@
-import { addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, orderBy, query, startAfter, where } from "firebase/firestore";
 import { db } from "@/firebase";
-import { Article, ArticleState } from "@/types/types";
-import { NextResponse } from "next/server";
+import { Article } from "@/types/types";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+
 	const articlesRef = collection(db, "articles")
-	const q = query(articlesRef, orderBy("publishedDate", "desc"), where("author.id", "==", "z7N9PDPdk10f19juqkAT"))
+	const searchParams = req.nextUrl.searchParams
+	const cursorId = searchParams.get("cursorId") || null
+	const cursorDoc =  await getDoc(doc(db, "articles",`${cursorId}`))
+	
+	let q = query(articlesRef, orderBy("publishedDate", "desc"), where("author.id", "==", "z7N9PDPdk10f19juqkAT"), limit(8))
+	if(cursorDoc?.exists()) {
+		q = query(articlesRef, orderBy("publishedDate", "desc"), where("author.id", "==", "z7N9PDPdk10f19juqkAT"), startAfter(cursorDoc), limit(8))
+	}
 	const querySnapshot = await getDocs(q)
 	const data: Article[] = querySnapshot?.docs?.map((doc) => ({
 		id: doc?.id,
@@ -16,29 +24,6 @@ export async function GET() {
 		state: doc.data()?.state,
 		main_photo_url: doc.data()?.main_photo_url
 	}))
-	return NextResponse.json(data)
-}
 
-//articles/z7N9PDPdk10f19juqkAT/EqoxJwj9GJjDMerCO3JA
-export async function POST() {
-	try {
-		await addDoc(collection(db, "articles"), {
-			author: {
-				id: "z7N9PDPdk10f19juqkAT",
-				alias: "Izius"
-			},
-			title: "Ilustración y capitalismo: un matrimonio feliz",
-				contentFile: {
-					id: "",
-					path: "articles/z7N9PDPdk10f19juqkAT/EqoxJwj9GJjDMerCO3JA" ,
-					url: ""
-				},
-				publishedDate: new Date("2024-02-06"),
-				editedDates: [],
-				state: ArticleState.PUBLISHED,
-				main_photo_url: ""
-		})
-	} catch(e) {
-		console.log("Error", JSON.stringify(e))
-	}
+	return NextResponse.json(data)
 }
