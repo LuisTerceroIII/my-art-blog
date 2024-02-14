@@ -57,7 +57,7 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 
 	return (
 		<motion.div ref={contentRef} className={styles.horizontalScrollContainer} >
-			<h1 className={styles.title}>Folium Ater</h1>
+			<h1 className={styles.title}>FOLIUM ATER</h1>
 			<motion.div className={styles.horizontalScroll} style={{ width: isLoading ? '100%' : undefined }}>
 				{isLoading ? <Loader style={{ alignSelf: "center" }} /> :
 					articles.map((article: Article, index: number) => (

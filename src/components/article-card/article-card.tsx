@@ -37,7 +37,6 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
             tabIndex={1} 
             onBlur={onBlur}
             onViewportEnter={() => {
-                console.log("ENTERING", {isLast}, article.title)
                 setLastArticleInViewport(isLast)
             }}>
             {isSelected ? (
