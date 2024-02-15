@@ -4,6 +4,7 @@ import { Article, FetchState } from '@/types/types'
 import { motion } from "framer-motion"
 import { Loader } from '../loader/loader'
 import styles from './main-articles-feed.module.css'
+import { Signature } from '../signature/signature'
 
 interface FeedArticlesProps { }
 
@@ -24,7 +25,7 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 	const handleFocusChange = (index: number) => {
 		setFocusedIndex(index === focusedIndex ? -1 : index)
 	}
-	
+
 	useEffect(() => {
 		const fetchArticles = async () => {
 			setInitFetchState(FetchState.LOADING)
@@ -32,7 +33,7 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 			if (res.ok) {
 				const data = await res.json()
 				setArticles(data)
-				setCursorId(data[data?.length-1]?.id)
+				setCursorId(data[data?.length - 1]?.id)
 				setInitFetchState(FetchState.SUCCESS)
 			} else setInitFetchState(FetchState.ERROR)
 		}
@@ -41,14 +42,14 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 
 	useEffect(() => {
 		const loadMoreArticles = async () => {
-			if(!lastArticleInViewport) return
-			if(cursorId == null) return
+			if (!lastArticleInViewport) return
+			if (cursorId == null) return
 			setFetchState(FetchState.LOADING)
 			const res = await fetch(`${mainURL}?cursorId=${cursorId}`)
 			if (res.ok) {
 				const data = await res.json()
 				setArticles([...articles, ...data])
-				setCursorId(data[data?.length -1]?.id)
+				setCursorId(data[data?.length - 1]?.id)
 				setFetchState(FetchState.SUCCESS)
 			} else setFetchState(FetchState.ERROR)
 		}
@@ -56,25 +57,29 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 	}, [lastArticleInViewport])
 
 	return (
-		<motion.div ref={contentRef} className={styles.horizontalScrollContainer} >
-			<h1 className={styles.title}>FOLIUM ATER</h1>
-			<motion.div className={styles.horizontalScroll} style={{ width: isLoading ? '100%' : undefined }}>
-				{isLoading ? <Loader style={{ alignSelf: "center" }} /> :
-					articles.map((article: Article, index: number) => (
-						<ArticleCard
-							key={article?.id}
-							onClick={() => handleFocusChange(index)}
-							onBlur={() => handleFocusChange(-1)}
-							isSelected={index === focusedIndex}
-							article={article}
-							someIsSelected={focusedIndex > -1} 
-							setLastArticleInViewport={setLastArticuleInViewport}
-							isLast={articles?.length-1 === index}
+		<>
+			<motion.div ref={contentRef} className={styles.horizontalScrollContainer} >
+				<h1 className={styles.title}>FOLIUM ATER</h1>
+				<motion.div className={styles.horizontalScroll} style={{ width: isLoading ? '100%' : undefined }}>
+					{isLoading ? <Loader style={{ alignSelf: "center" }} /> :
+						articles.map((article: Article, index: number) => (
+							<ArticleCard
+								key={article?.id}
+								onClick={() => handleFocusChange(index)}
+								onBlur={() => handleFocusChange(-1)}
+								isSelected={index === focusedIndex}
+								article={article}
+								someIsSelected={focusedIndex > -1}
+								setLastArticleInViewport={setLastArticuleInViewport}
+								isLast={articles?.length - 1 === index}
 							/>
-					))
-				}
-				{fetchState === FetchState.LOADING && <Loader style={{ marginLeft: 16}} />}
+						))
+					}
+					{fetchState === FetchState.LOADING && <Loader style={{ marginLeft: 16 }} />}
+				</motion.div>
+
 			</motion.div>
-		</motion.div>
+			<Signature png classes={styles.signature}/>
+		</>
 	)
 }

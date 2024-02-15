@@ -28,13 +28,27 @@
 	font-size: 85px;
 	position: absolute;
 	top: 50px;
-	right: 50px;
+	left: 50px;
 	color: #FFFFE0;
+	letter-spacing: 27px;
+}
+.signature {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	width: 300px;
+	height: auto;
+	object-fit: contain;
+	cursor: pointer;
 }
 
 @media(max-width: 900px) {
 	.title {
 		font-size: 45px;
 		right: 20px;
+		letter-spacing: 20px;
+	}
+	.signature {
+		width: 200px;
 	}
 }
