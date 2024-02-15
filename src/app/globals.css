@@ -41,3 +41,17 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:root {
+	--grey: #bdc3d9;
+	--softGrey: #f0f0f7;
+	--hardGrey: #9599a8;
+	--red: #c1292e;
+	--yellow: #f1d302;
+	--white: #fdfffc;
+	--black: #0f1a20;
+	--blue: #235789;
+	--background: #191cd0; /*"#8073FC"*/
+	--backgroundYellow: #ffffe0;
+  }
+  
