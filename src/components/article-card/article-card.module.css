@@ -96,6 +96,7 @@
     margin-top: 30px;
     padding-left: 20px;
     padding-right: 20px;
+    line-height: 30px;
 }
 
 .imageTitle {
@@ -133,4 +134,11 @@
     font-size: 14px;
     line-height: 1.9;
     padding: 20px;
+}
+.publishDate {
+    font-size: 13px;
+    text-align: right;
+    color: var(--black);
+    padding-right: 30px;
+    padding-bottom: 20px;
 }

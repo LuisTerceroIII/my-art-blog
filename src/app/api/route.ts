@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getDocs, limit, orderBy, query, startAfter, where } from "firebase/firestore";
-import { db } from "@/firebase";
+import { db, firebase } from "@/firebase";
 import { Article } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 		id: doc?.id,
 		title: doc.data()?.title,
 		contentFile: doc.data()?.contentFile,
-		publishedDate: doc.data()?.publishedDate,
+		publishedDate: new Date(doc?.data()?.publishedDate.seconds * 1000 + doc?.data()?.publishedDate.nanoseconds / 1000000),
 		editedDates: doc.data()?.editedDates,
 		state: doc.data()?.state,
 		main_photo_url: doc.data()?.main_photo_url

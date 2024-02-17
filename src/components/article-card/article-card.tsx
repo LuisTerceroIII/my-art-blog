@@ -3,6 +3,7 @@ import React, { CSSProperties, FC } from 'react'
 import { motion, useScroll, useSpring } from "framer-motion"
 import MarkdownReader from '../markdown-reader/markdown-reader'
 import styles from "./article-card.module.css"
+import { longDateFormat } from '@/utils/formats'
 
 export interface ArticleCardProps {
     article: Article
@@ -49,10 +50,12 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
             )}
             <section ref={contentRef} className={isSelected ? styles.contentContainer : styles.invisible}>
                 <motion.div style={{scaleX}} className={styles.progressBar} />
+
                 <p className={styles.title}>{article.title}</p>
                 <div style={{position: "relative"}}>
                     <MarkdownReader markdownUrl={article.contentFile?.url || ""} classes={styles.markdownContainer}/>
                 </div>
+                <p className={styles.publishDate}>{longDateFormat(article?.publishedDate)}</p>
             </section>
         </motion.div>
     )
