@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring } from "framer-motion"
 import MarkdownReader from '../markdown-reader/markdown-reader'
 import styles from "./article-card.module.css"
 import { longDateFormat } from '@/utils/formats'
+import Image from 'next/image'
 
 export interface ArticleCardProps {
     article: Article
@@ -41,10 +42,10 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                 setLastArticleInViewport(isLast)
             }}>
             {isSelected ? (
-                <motion.img src={article.main_photo_url} alt={article.title} className={`${styles.image} ${isSelected && styles.imageSelected} ${!someIsSelected && !isSelected && styles.scaleUp}`}/>
+                <Image src={article.main_photo_url || ""} alt={article.title} width={200} height={242} className={`${styles.image} ${isSelected && styles.imageSelected} ${!someIsSelected && !isSelected && styles.scaleUp}`}/>
             ) : (
                 <motion.div className={styles.scaleUp} style={{position: "relative", zIndex: 2}}>
-                    <motion.img src={article.main_photo_url} alt={article.title} className={`${styles.image} ${styles.scaleUp}`}/>
+                    <Image src={article.main_photo_url || ""} alt={article.title} width={200} height={242} className={`${styles.image} ${styles.scaleUp}`}/>
                     <p className={styles.imageTitle}>{article?.title}</p>
                 </motion.div>
             )}
