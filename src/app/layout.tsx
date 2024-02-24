@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Folium Ater',
-    description: ' Artículos, opiniones, pensamientos, ideas, sobre la vida, arte y filosofia por Luis Espinoza',
+    title: 'Folium Ater por Luis Espinoza',
+    description: ' Artículos, opiniones, pensamientos, ideas sobre la vida, arte y filosofia por Luis Espinoza',
     url: 'https://foliumater.netlify.app',
     siteName: 'Folium Ater',
     locale: 'es_ES',
