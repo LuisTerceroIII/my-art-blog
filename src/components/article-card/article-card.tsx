@@ -9,7 +9,7 @@ import Image from 'next/image'
 export interface ArticleCardProps {
     article: Article
     isSelected: boolean
-    onClick(): void
+    onClick?(): void
     onBlur(): void
     someIsSelected: boolean
     containerStyle?: CSSProperties
@@ -36,7 +36,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
         <motion.div 
             style={containerStyle} 
             className={`${styles.mainContainer} ${isSelected && styles.selectedMainContainer} ${!someIsSelected && styles.scaleUp}`} 
-            onClick={onClick} 
+            onClick={ isSelected ? () => null : onClick} 
             tabIndex={position+1} 
             onBlur={onBlur}
             onViewportEnter={() => {
