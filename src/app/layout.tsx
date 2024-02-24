@@ -5,7 +5,7 @@ import "./globals.css";
 const ptSerif = PT_Serif({weight: ["400", "700"], subsets: ["cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "Folium Ater: arte y filosofia",
+  title: "Folium Ater: arte y filosofía",
   description: "Folium Ater es un espacio para la reflexión y la creatividad. Explora artículos, pensamientos e ideas sobre la vida, el arte y la filosofía por Luis Espinoza.",
   keywords: ["filosofía", "devenir", "arte", "vida", "pensamiento", "ideas", "reflexión", "creatividad","Luis", "Espinoza", "Luis Espinoza", "Folium Ater","artículos", "opiniones", "pensamientos","reflexionar","inspirar"],
   metadataBase: new URL('https://foliumater.netlify.app'),
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Folium Ater por Luis Espinoza',
-    description: ' Artículos, opiniones, pensamientos, ideas sobre la vida, arte y filosofia por Luis Espinoza',
+    description: ' Artículos, opiniones, pensamientos, ideas sobre la vida, arte y filosofía por Luis Espinoza',
     url: 'https://foliumater.netlify.app',
     siteName: 'Folium Ater',
     locale: 'es_ES',
