@@ -15,12 +15,13 @@ export interface ArticleCardProps {
     containerStyle?: CSSProperties
     setLastArticleInViewport?(b:boolean): void
     isLast?: boolean
+    position?: number // to not increment tab index
 }
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
 
     
-    const { article, isSelected, onClick, onBlur, someIsSelected, containerStyle, setLastArticleInViewport=(b:boolean)=>null, isLast=false } = props
+    const { article, isSelected, onClick, onBlur, someIsSelected, containerStyle, setLastArticleInViewport=(b:boolean)=>null, isLast=false, position=1 } = props
 
     const contentRef = React.useRef<HTMLDivElement>(null)
 
@@ -36,7 +37,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
             style={containerStyle} 
             className={`${styles.mainContainer} ${isSelected && styles.selectedMainContainer} ${!someIsSelected && styles.scaleUp}`} 
             onClick={onClick} 
-            tabIndex={1} 
+            tabIndex={position+1} 
             onBlur={onBlur}
             onViewportEnter={() => {
                 setLastArticleInViewport(isLast)

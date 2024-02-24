@@ -72,6 +72,7 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 								someIsSelected={focusedIndex > -1}
 								setLastArticleInViewport={setLastArticuleInViewport}
 								isLast={articles?.length - 1 === index}
+								position={index}
 							/>
 						))
 					}
