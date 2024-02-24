@@ -2,7 +2,7 @@
 
 const nextConfig = {
     images: {
-        domains: ["i.pinimg.com", "blogger.googleusercontent.com"]
+        domains: ["i.ibb.co"]
     },
     async headers() {
         return [
