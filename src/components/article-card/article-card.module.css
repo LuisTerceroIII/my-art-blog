@@ -75,7 +75,7 @@
 
 .contentContainer {
     width: 400px;
-    background-color: var(--white);
+    background-color: var(--backgroundYellow);
     overflow-y: auto;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;

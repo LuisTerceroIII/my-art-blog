@@ -1,10 +1,12 @@
 import { Article } from '@/types/types'
-import React, { CSSProperties, FC } from 'react'
+import React, { CSSProperties, FC, useState } from 'react'
 import { motion, useScroll, useSpring } from "framer-motion"
 import MarkdownReader from '../markdown-reader/markdown-reader'
 import styles from "./article-card.module.css"
 import { longDateFormat } from '@/utils/formats'
 import Image from 'next/image'
+import { colors } from '@/theme/colors'
+import { getRandomBackgroundColor } from '@/utils/ramdon-colors'
 
 export interface ArticleCardProps {
     article: Article
@@ -20,9 +22,8 @@ export interface ArticleCardProps {
 
 export const ArticleCard: FC<ArticleCardProps> = (props) => {
 
-    
     const { article, isSelected, onClick, onBlur, someIsSelected, containerStyle, setLastArticleInViewport=(b:boolean)=>null, isLast=false, position=1 } = props
-
+    const [contentBackgroundColor, setContentBackgroundColor] = useState(colors.backgroundYellow)
     const contentRef = React.useRef<HTMLDivElement>(null)
 
     const { scrollYProgress } = useScroll({container: contentRef})
@@ -32,11 +33,16 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
         restDelta: 0.001
     })
 
+    const handleClick = () => {
+        onClick && onClick()
+        setContentBackgroundColor(getRandomBackgroundColor())
+    }
+
     return (
         <motion.div 
             style={containerStyle} 
             className={`${styles.mainContainer} ${isSelected && styles.selectedMainContainer} ${!someIsSelected && styles.scaleUp}`} 
-            onClick={ isSelected ? () => null : onClick} 
+            onClick={ isSelected ? () => null : handleClick} 
             tabIndex={position+1} 
             onBlur={onBlur}
             onViewportEnter={() => {
@@ -50,7 +56,7 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
                     <p className={styles.imageTitle}>{article?.title}</p>
                 </motion.div>
             )}
-            <section ref={contentRef} className={isSelected ? styles.contentContainer : styles.invisible}>
+            <section ref={contentRef} className={isSelected ? styles.contentContainer : styles.invisible} style={{backgroundColor: contentBackgroundColor}}>
                 <motion.div style={{scaleX}} className={styles.progressBar} />
 
                 <p className={styles.title}>{article.title}</p>
