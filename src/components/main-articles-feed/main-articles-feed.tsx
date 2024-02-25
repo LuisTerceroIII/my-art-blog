@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Loader } from '../loader/loader'
 import styles from './main-articles-feed.module.css'
 import { Signature } from '../signature/signature'
+import { Title } from '../title/title'
 
 interface FeedArticlesProps { }
 
@@ -59,7 +60,7 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 	return (
 		<>
 			<motion.div ref={contentRef} className={styles.horizontalScrollContainer} >
-				<h1 className={styles.title}>FOLIUM ATER</h1>
+				<Title />
 				<motion.div className={styles.horizontalScroll} style={{ width: isLoading ? '100%' : undefined }}>
 					{isLoading ? <Loader style={{ alignSelf: "center" }} /> :
 						articles.map((article: Article, index: number) => (

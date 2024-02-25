@@ -1,0 +1,32 @@
+@keyframes neonAnim {
+    from {
+        text-shadow:
+          0 0 13px rgba(230, 235, 241, .7),
+          0 0 43px rgba(230, 235, 241, .7),
+          0 0 103px rgba(230, 235, 241, .7);
+      }
+      to {
+        text-shadow:
+          0 0 8px rgba(230, 235, 241, .7),
+          0 0 23px rgba(230, 235, 241, .7),
+          0 0 63px rgba(230, 235, 241, .7);
+      }
+}
+
+.title {
+	font-size: 85px;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	color: var(--backgroundYellow);
+	letter-spacing: 27px;
+    animation: neonAnim 4s alternate-reverse infinite;
+}
+
+@media(max-width: 900px) {
+	.title {
+		font-size: 45px;
+		right: 20px;
+		letter-spacing: 20px;
+	}
+}

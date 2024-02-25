@@ -15,7 +15,7 @@ export const Signature: React.FunctionComponent<SignatureProps> = (props) => {
 
 	const { width = 350, height = 270, linesColor = colors.yellow, opacity = 1, styles, png=false, classes } = props
 
-	return png ? <img src="signature.png" className={classes} alt="signature" onClick={() => {window.location.href = 'mailto:luis.espinoza.na@gmail.com?subject=FoliumAter';}}/> : (
+	return png ? <img src="signature.png" className={classes} alt="signature" onClick={() => {window.location.href = 'mailto:luis.espinoza.na@gmail.com?subject=LuxAter';}}/> : (
 		<svg
 			viewBox="0 0 350 270"
 			width={width}
