@@ -1,7 +1,8 @@
-import { ReactP5Wrapper } from "react-p5-wrapper";
+import dynamic from "next/dynamic";
+import { P5WrapperProps } from "react-p5-wrapper";
 
-let canvasWidth = 2000//window.innerWidth
-let canvasHeight = 2000//window.innerHeight
+let canvasWidth = 2000
+let canvasHeight = 2000
 let totalCircles = 7//16
 let dimension = 0
 let margin = 0
@@ -41,7 +42,13 @@ function sketch(p5: any) {
 	p5.draw = draw(p5);
 }
 
+
 export const BackgroundFlowFragtal = () => {
+
+	const ReactP5Wrapper = dynamic(() => import('react-p5-wrapper')
+    .then(mod => mod.ReactP5Wrapper as any), {
+    ssr: false
+}) as unknown as React.NamedExoticComponent<P5WrapperProps>
 
 	return (
 		<ReactP5Wrapper sketch={sketch} />
