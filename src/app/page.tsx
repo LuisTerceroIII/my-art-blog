@@ -1,20 +1,18 @@
 "use client"
 
 import { MainArticlesFeed } from "@/components/main-articles-feed/main-articles-feed";
+import { BackgroundFlowFragtal } from "@/components/p5/background-flow-fragtal";
+import { FlowFragtal } from "@/components/p5/flow-fragtal";
+import { Fragtal } from "@/components/p5/fragtal";
 import { colors } from "@/theme/colors";
 
 export default function Home() {
 
-/* 	const postNewArticle = async () => {
-		await fetch("http://localhost:3000/api", {
-			method:"POST",
-		})
-	} */
-
-
 	return (
 		<main style={{ backgroundColor: colors.background }}>
-			{/* <button onClick={postNewArticle}> POST SAVED</button> */}
+			<div style={{position: "absolute", top: 0, left: 0}}>
+				<BackgroundFlowFragtal/>
+			</div>
 			<MainArticlesFeed />
 		</main>
 	);
