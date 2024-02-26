@@ -2,8 +2,6 @@
 
 import { MainArticlesFeed } from "@/components/main-articles-feed/main-articles-feed";
 import { BackgroundFlowFragtal } from "@/components/p5/background-flow-fragtal";
-import { FlowFragtal } from "@/components/p5/flow-fragtal";
-import { Fragtal } from "@/components/p5/fragtal";
 import { colors } from "@/theme/colors";
 
 export default function Home() {

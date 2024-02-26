@@ -1,7 +1,7 @@
 import { ReactP5Wrapper } from "react-p5-wrapper";
 
-let canvasWidth = window.innerWidth
-let canvasHeight = window.innerHeight
+let canvasWidth = 2000//window.innerWidth
+let canvasHeight = 2000//window.innerHeight
 let totalCircles = 10
 let dimension = 0
 let margin = 0
