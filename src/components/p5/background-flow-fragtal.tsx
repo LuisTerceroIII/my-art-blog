@@ -1,9 +1,9 @@
 import dynamic from "next/dynamic";
 import { P5WrapperProps } from "react-p5-wrapper";
 
-let canvasWidth = 2000
-let canvasHeight = 2000
-let totalCircles = 7//16
+let canvasWidth = window.innerWidth
+let canvasHeight = window.innerHeight
+let totalCircles = 4//16
 let dimension = 0
 let margin = 0
 let dimensionModulator = 1 // para hacerlo mas pequeno moverse entre 1.0 y 0, y para hacerlo mas grande 1.0 >
