@@ -54,4 +54,10 @@ table {
 	--background: #191cd0; /*"#8073FC"*/
 	--backgroundYellow: #ffffe0;
   }
+
+canvas {
+	min-width: 100% !important;
+	height: 100svh !important;
+	object-fit: cover;
+  }
   

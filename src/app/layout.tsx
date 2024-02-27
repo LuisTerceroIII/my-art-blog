@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Lux Ater: arte y filosofía",
   description: "Lux Ater es un espacio para la reflexión y la creatividad. Explora artículos, pensamientos e ideas sobre la vida, el arte y la filosofía por Luis Espinoza.",
   keywords: ["filosofía", "devenir", "arte", "vida", "pensamiento", "ideas", "reflexión", "creatividad","Luis", "Espinoza", "Luis Espinoza", "Lex Ater","artículos", "opiniones", "pensamientos","reflexionar","inspirar"],
-  metadataBase: new URL('https://luxater.netlify.app'),
+  metadataBase: new URL('https://luxater.blog'),
   authors: [
     {
       name: "Luis Espinoza",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Lux Ater por Luis Espinoza',
     description: ' Artículos, opiniones, pensamientos, ideas sobre la vida, arte y filosofía por Luis Espinoza',
-    url: 'https://luxater.netlify.app',
+    url: 'https://luxater.blog',
     siteName: 'Lux Ater',
     locale: 'es_ES',
     type: 'website',

@@ -1,9 +1,8 @@
-import { ReactP5Wrapper } from "react-p5-wrapper";
+import dynamic from "next/dynamic";
+import { P5WrapperProps } from "react-p5-wrapper";
 
-let canvasWidth = 2000//window.innerWidth
-let canvasHeight = 2000//window.innerHeight
-let totalCircles = 7//16
-let dimension = 0
+let totalCircles = 4//16
+let dimension = 100
 let margin = 0
 let dimensionModulator = 1 // para hacerlo mas pequeno moverse entre 1.0 y 0, y para hacerlo mas grande 1.0 >
 let frequence = 0.050
@@ -13,7 +12,7 @@ let x, y
 function setup(p5: any) {
     
 	return () => {
-		p5.createCanvas(canvasWidth, canvasHeight);
+		p5.createCanvas(window.innerWidth, window.innerHeight);
 		dimension = (p5.width - 2 * margin) / totalCircles
 		p5.angleMode(p5.DEGREES)
 	};
@@ -29,7 +28,7 @@ function draw(p5: any) {
 			for (let j = 0; j < totalCircles; j++) {
 				x = margin + dimension / 2 + i * dimension
 				y = margin + dimension / 2 + j * dimension
-				dimensionModulator = p5.sin(frequence * p5.frameCount + .2 * p5.dist(canvasWidth/2, canvasHeight/2, x, y)) * 10
+				dimensionModulator = p5.sin(frequence * p5.frameCount + .2 * p5.dist(window.innerWidth/2,  window.innerHeight/2, x, y)) * 10
 				p5.circle(x, y, dimensionModulator * dimension)
 			}
 		}
@@ -42,6 +41,8 @@ function sketch(p5: any) {
 }
 
 export const BackgroundFlowFragtal = () => {
+
+	const ReactP5Wrapper = dynamic(() => import('react-p5-wrapper').then(mod => mod.ReactP5Wrapper as any), { ssr: false }) as unknown as React.NamedExoticComponent<P5WrapperProps>
 
 	return (
 		<ReactP5Wrapper sketch={sketch} />
