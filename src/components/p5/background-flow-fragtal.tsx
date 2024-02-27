@@ -1,9 +1,6 @@
 import dynamic from "next/dynamic";
-import { useState } from "react";
 import { P5WrapperProps } from "react-p5-wrapper";
 
-let canvasWidth = window.innerWidth
-let canvasHeight = window.innerHeight
 let totalCircles = 4//16
 let dimension = 100
 let margin = 0
