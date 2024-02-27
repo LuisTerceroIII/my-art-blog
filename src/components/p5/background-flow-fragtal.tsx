@@ -5,7 +5,7 @@ let totalCircles = 4//16
 let dimension = 100
 let margin = 0
 let dimensionModulator = 1 // para hacerlo mas pequeno moverse entre 1.0 y 0, y para hacerlo mas grande 1.0 >
-let frequence = 0.050
+let frequence = 0.005
 let colors = ["#ffd60a", "#ffc300", "#003566", "#001d3d", "#ffff", "#131317", "#390099"]
 let x, y
 
