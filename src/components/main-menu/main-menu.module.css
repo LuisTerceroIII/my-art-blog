@@ -16,12 +16,58 @@
     justify-content: center;
     align-items: center;
     gap: 9px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #131317;
+    z-index: 11;
 }
-
-
+.closeMenuBox {
+    height: 0px;
+    width: 0px;
+}
+.openMenuBox {
+    height: 300px;
+    width: 300px;
+}
+.menuBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    position: relative;
+    transition: all .6s ease-in-out;
+    top: 24px;
+    right: 24px;
+    border-radius: 20px;
+    z-index: 10;
+    border-radius: 50px;
+    background: #131317;
+    box-shadow:  20px 20px 60px #101014, -20px -20px 60px #16161a;
+    overflow: hidden;
+}
+.flowText {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    margin-top: 30px;
+}
 @media(max-width: 900px) {
 	.menuContainer {
         top: 40px;
         right: 40px;
 	}
+}
+@media(max-width: 400px) {
+	.menuContainer {
+        top: 40px;
+        right: 20px;
+	}
+    .openMenuBox {
+        height: 250px;
+        width: 250px;
+    }
 }
