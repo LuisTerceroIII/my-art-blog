@@ -6,6 +6,14 @@ export const FlowFragtal = dynamic(() => import("@/components/p5/flow-fragtal").
 
 export const Fragtal = dynamic(() => import("@/components/p5/fragtal").then(mod => mod.Fragtal as any), {ssr: false})
 
-export const Tornado = dynamic(() => import("@/components/p5/tornado").then(mod => mod.Tornado as any), {ssr: false})
+export const Canal = dynamic(() => import("@/components/p5/canal").then(mod => mod.Canal as any), {ssr: false})
 
 export const VirtualityEvolution = dynamic(() => import("@/components/p5/virtuality-evolution").then(mod => mod.VirtualityEvolution as any), {ssr: false})
+
+export enum flowsRoutes {
+    FlowFragtal= "flow-fragtal",
+    Fragtal = "fragtal",
+    Canal = "canal",
+    VirtualEvolution = "virtual-evolution",
+    BackgroundFlowFragtal = "background-flow"
+}

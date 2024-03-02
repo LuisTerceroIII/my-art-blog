@@ -7,7 +7,7 @@ let dimension = 0
 let margin = 0
 let dimensionModulator = .25 // para hacerlo mas pequeno moverse entre 1.0 y 0, y para hacerlo mas grande 1.0 >
 let frequence = .02
-let colors = ["#ffd60a", "#ffc300", "#003566", "#001d3d" ]
+let colors = ["#390099", "#ffc300", "#003566", "#001d3d" ]
 let x,y
 
 function setup(p5: any) {

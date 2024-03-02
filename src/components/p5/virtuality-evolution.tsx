@@ -17,7 +17,7 @@ let scaleFactor = 50; // Factor de escala inicial para la generación de posicio
 function setup(p5: any) {
   return () => {
     p5.createCanvas(window.innerWidth, window.innerHeight, p5.WEBGL);
-    setInterval(() => generateNode(p5), 1000); // Agregar un nodo cada segundo
+    setInterval(() => generateNode(p5), 3000); // Agregar un nodo cada segundo
   };
 }
 function draw(p5: any) {
