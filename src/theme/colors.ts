@@ -7,6 +7,8 @@ export const colors = {
     white: "#FDFFFC",
     black: "#0F1A20",
     blue: "#235789",
+    purple: "#8073FC",
+    secondaryPurple: "#390099",
     background: "#131317",//"#191CD0",//"#8073FC",
     backgroundYellow: "#FFFFE0",
 
