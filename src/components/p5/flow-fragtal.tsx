@@ -11,7 +11,7 @@ let x, y
 function setup(p5: any) {
 	return () => {
 		p5.createCanvas(window.innerWidth, window.innerHeight);
-		dimension = (p5.width - 2 * margin) / totalCircles
+		dimension = (window.innerWidth - 2 * margin) / totalCircles
 		p5.angleMode(p5.DEGREES)
 	};
 }

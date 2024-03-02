@@ -1,7 +1,5 @@
 import { ReactP5Wrapper } from "react-p5-wrapper";
 
-let canvasWidth = window.innerWidth
-let canvasHeight = window.innerHeight
 let totalCircles = 10
 let dimension = 0
 let margin = 0
@@ -12,7 +10,7 @@ let x,y
 
 function setup(p5: any) {
 	return () => {
-		p5.createCanvas(canvasWidth, canvasHeight);
+		p5.createCanvas(window.innerWidth, window.innerHeight);
 		dimension = (p5.width - 2 * margin) / totalCircles
 		p5.angleMode(p5.DEGREES)
 	};
