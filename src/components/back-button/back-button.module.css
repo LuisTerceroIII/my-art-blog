@@ -3,3 +3,10 @@
     top: 60px;
     left: 60px;
 }
+
+@media(max-width: 900px) {
+	.backButton {
+		left: 20px;
+        top: 20px;
+	}
+}
