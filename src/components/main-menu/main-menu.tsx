@@ -5,6 +5,19 @@ import { flowsRoutes } from '../p5'
 import { flowsRoutesTx } from '@/utils/dictionary'
 import { CircleButton } from '../circle-button/circle-button'
 
+
+export const MainMenu = () => {
+
+	const [isOpen, setIsOpen] = useState(false)
+
+	const toggleMenu = () => {
+		setIsOpen(prev => !prev)
+	}
+	const close = () => {
+		setIsOpen(false)
+	}
+
+
 const flowsLink = Object.values(flowsRoutes).map((path, index, arr) => {
 	const isFirst = index === 0
 	const isLast = index === arr?.length - 1
@@ -18,17 +31,6 @@ const flowsLink = Object.values(flowsRoutes).map((path, index, arr) => {
 		</Link>
 	)
 })
-
-export const MainMenu = () => {
-
-	const [isOpen, setIsOpen] = useState(false)
-
-	const toggleMenu = () => {
-		setIsOpen(prev => !prev)
-	}
-	const close = () => {
-		setIsOpen(false)
-	}
 
 	return (
 		<section className={styles.menuContainer} onBlur={close} tabIndex={2}>
