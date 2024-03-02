@@ -18,7 +18,9 @@ export const BackButton: FC<BackButtonProps> = (props) => {
 
     const router = useRouter()
 
+	const goToHome = () => router.push("/")
+
 	return (
-		<CircleButton icon="leftArrow" onClick={router.back} containerClasses={styles.backButton} color={props.color}/>
+		<CircleButton icon="leftArrow" onClick={goToHome} containerClasses={styles.backButton} color={props.color}/>
 	)
 }

@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react'
+import React, { useState } from 'react'
 import styles from "./main-menu.module.css"
 import Link from 'next/link'
 import { flowsRoutes } from '../p5'
@@ -18,19 +18,19 @@ export const MainMenu = () => {
 	}
 
 
-const flowsLink = Object.values(flowsRoutes).map((path, index, arr) => {
-	const isFirst = index === 0
-	const isLast = index === arr?.length - 1
-	return (
-		<Link
-			href={`flows/${path}`}
-			style={{ marginTop: isFirst ? 10 : 0 }}
-			key={path}
-			className={styles.link}>
-			<p className={`${styles.option} ${!isLast && styles.borderBottom}`}>{flowsRoutesTx[path]}</p>
-		</Link>
-	)
-})
+	const flowsLink = Object.values(flowsRoutes).map((path, index, arr) => {
+		const isFirst = index === 0
+		const isLast = index === arr?.length - 1
+		return (
+			<Link
+				href={`flows/${path}`}
+				style={{ marginTop: isFirst ? 10 : 0 }}
+				key={path}
+				className={styles.link}>
+				<p className={`${styles.option} ${!isLast && styles.borderBottom}`}>{flowsRoutesTx[path]}</p>
+			</Link>
+		)
+	})
 
 	return (
 		<section className={styles.menuContainer} onBlur={close} tabIndex={2}>
