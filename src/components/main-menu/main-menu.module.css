@@ -1,0 +1,90 @@
+.menuContainer {
+    display: flex;
+    position: absolute;
+	top: 65px;
+    right: 50px;
+}
+.mainButton {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 11;
+}
+.closeMenuBox {
+    height: 0px;
+    width: 0px;
+    transition: all .6s ease-in-out;
+
+}
+.openMenuBox {
+    height: 320px;
+    width: 320px;
+    transition: all .6s ease-in-out;
+    overflow: scroll;
+
+}
+.menuBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: antiquewhite;
+    position: relative;
+    transition: all .6s ease-in-out;
+    top: 24px;
+    right: 24px;
+    border-radius: 20px;
+    z-index: 10;
+    border-radius: 50px;
+    background: #131317;
+    box-shadow:  20px 20px 60px #101014, -20px -20px 60px #16161a;
+    padding-bottom: 20px;
+    overflow: auto;
+}
+.flowText {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    margin-top: 60px;
+    padding-left: 40px;
+}
+.link {
+    padding: 0 35px;
+    text-decoration: none;
+}
+.option {
+    font-size: 20;
+    font-weight: 700;
+    color: var(--backgroundYellow);
+    text-decoration: none;
+    height: 30px;
+    transition: color .5s ease-in;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.borderBottom {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--softGrey);
+}
+.option:hover {
+    color: var(--yellow);
+
+}
+@media(max-width: 900px) {
+	.menuContainer {
+        top: 40px;
+        right: 40px;
+	}
+}
+@media(max-width: 400px) {
+	.menuContainer {
+        top: 40px;
+        right: 20px;
+	}
+    .openMenuBox {
+        height: 250px;
+        width: 250px;
+    }
+}

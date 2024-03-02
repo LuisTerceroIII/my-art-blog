@@ -6,6 +6,7 @@ import { Loader } from '../loader/loader'
 import styles from './main-articles-feed.module.css'
 import { Signature } from '../signature/signature'
 import { Title } from '../title/title'
+import { MainMenu } from '../main-menu/main-menu'
 
 interface FeedArticlesProps { }
 
@@ -61,6 +62,7 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 		<>
 			<motion.div ref={contentRef} className={styles.horizontalScrollContainer} >
 				<Title />
+				<MainMenu/>
 				<motion.div className={styles.horizontalScroll} style={{ width: isLoading ? '100%' : undefined }}>
 					{isLoading ? <Loader style={{ alignSelf: "center" }} /> :
 						articles.map((article: Article, index: number) => (
