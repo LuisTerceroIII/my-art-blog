@@ -42,6 +42,28 @@
 	cursor: pointer;
 }
 
+.scrollButton {
+	position: absolute;
+	left: 5vw;
+	top: 50vh;
+	z-index: 100;
+}
+.scrollRightButton {
+	position: absolute;
+	right: 5vw;
+	top: 50vh;
+	z-index: 100;
+	rotate: 180deg;
+}
+.scrollButton:hover {
+	transition: 0.3s transform linear;
+    transform: scale(0.9);
+}
+.scrollRightButton:hover {
+	transition: 0.3s transform linear;
+    transform: scale(0.9);
+}
+
 @media(max-width: 900px) {
 	.title {
 		font-size: 45px;
