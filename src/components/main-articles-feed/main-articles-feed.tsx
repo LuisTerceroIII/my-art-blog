@@ -61,24 +61,23 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 
 	const scrollLeft = () => {
 		if (contentRef.current) {
-		  contentRef.current.scrollBy({ left: -500, behavior: 'smooth' });
+			contentRef.current.scrollBy({ left: -500, behavior: 'smooth' });
 		}
-	  }
-	
-	  const scrollRight = () => {
-		if (contentRef.current) {
-		  contentRef.current.scrollBy({ left: 500, behavior: 'smooth' });
-		}
-	  }
+	}
 
+	const scrollRight = () => {
+		if (contentRef.current) {
+			contentRef.current.scrollBy({ left: 500, behavior: 'smooth' });
+		}
+	}
 
 	return (
 		<>
 			<motion.div ref={contentRef} className={styles.horizontalScrollContainer} >
 				<Title />
-				<MainMenu/>
-				<CircleButton icon="leftArrow" containerClasses={styles.scrollButton} onClick={scrollLeft}/>
+				<MainMenu />
 				<motion.div className={styles.horizontalScroll} style={{ width: isLoading ? '100%' : undefined }}>
+					<CircleButton icon="leftArrow" containerClasses={styles.scrollButton} onClick={scrollLeft} />
 					{isLoading ? <Loader style={{ alignSelf: "center" }} /> :
 						articles.map((article: Article, index: number) => (
 							<ArticleCard
@@ -95,10 +94,10 @@ export const MainArticlesFeed: FC<FeedArticlesProps> = (props) => {
 						))
 					}
 					{fetchState === FetchState.LOADING && <Loader style={{ marginLeft: 16 }} />}
+					<CircleButton icon="leftArrow" containerClasses={styles.scrollRightButton} onClick={scrollRight} />
 				</motion.div>
-				<CircleButton icon="leftArrow" containerClasses={styles.scrollRightButton}  onClick={scrollRight}/>
 			</motion.div>
-			<Signature png classes={styles.signature}/>
+			<Signature png classes={styles.signature} />
 		</>
 	)
 }
