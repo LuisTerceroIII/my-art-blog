@@ -89,4 +89,12 @@
 		bottom: 40px;
 		right: 40px;
 	}
+	.scrollButton {
+		width: 30px;
+		height: 30px;
+	}
+	.scrollRightButton {
+		width: 30px;
+		height: 30px;
+	}
 }
