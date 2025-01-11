@@ -17,7 +17,6 @@ export async function POST(req: Request) {
 		})
 
 	} catch (e) {
-		console.log("Error", JSON.stringify(e))
 		return NextResponse.json({
 			status: 500,
 			message: 'Error updating visit counter',
@@ -36,7 +35,6 @@ export async function GET(req: Request) {
 			})
 		}
 	} catch (e) {
-		console.log("Error", JSON.stringify(e))
 		return NextResponse.json({
 			status: 500,
 			message: 'Error getting visit counter',

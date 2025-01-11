@@ -17,7 +17,6 @@ export default function Home() {
 					}
 				})
 				res = await res.json()
-				console.log(res?.visits)
 				await fetch('/api/analytics/general/visit-counter', {
 					method: 'POST',
 					body: JSON.stringify({
