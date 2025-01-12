@@ -17,11 +17,20 @@ export default function Home() {
 					}
 				})
 				res = await res.json()
+				console.log("🚀 ~ updateVisitors ~ res:", res)
 				await fetch('/api/analytics/general/visit-counter', {
 					method: 'POST',
 					body: JSON.stringify({
 						// @ts-ignore
-						visits: res?.visits + 1
+						visits: res?.visits + 1,
+						visitors: [
+							{
+								time: new Date(),
+								userAgent: window.navigator.userAgent
+							}, 
+							// @ts-ignore
+							...res?.visitors
+						]
 					}),
 					headers: {
 						'Content-Type': 'application/json'

@@ -8,7 +8,8 @@ export async function POST(req: Request) {
 	try {
 		await setDoc(doc(db, "analytics", "visit-counter"), {
 			// @ts-ignore
-			visits: body.visits
+			visits: body.visits,
+			visitors: body.visitors
 		});
 
 		return NextResponse.json({
@@ -31,7 +32,8 @@ export async function GET(req: Request) {
 		if (docRef.exists()) {
 			return NextResponse.json({
 				status: 200,
-				visits: docRef?.data().visits
+				visits: docRef?.data().visits,
+				visitors: docRef?.data().visitors
 			})
 		}
 	} catch (e) {
