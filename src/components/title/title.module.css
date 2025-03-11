@@ -12,12 +12,13 @@
           0 0 63px rgba(230, 235, 241, .7);
       }
 }
-
-.title {
-	font-size: 85px;
-	position: absolute;
+.titleContainer {
+    position: absolute;
 	top: 50px;
 	left: 50px;
+}
+.title {
+	font-size: 85px;
 	color: var(--backgroundYellow);
 	letter-spacing: 27px;
     animation: neonAnim 4s alternate-reverse infinite;
@@ -33,6 +34,10 @@
 
 @media(max-width: 550px) {
 	.title {
-    max-width: 200px;
+        max-width: 100px;
+	    letter-spacing: 10px;
 	}
+    .titleContainer {
+	    left: 10px;
+    }
 }
