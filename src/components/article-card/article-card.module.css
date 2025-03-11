@@ -58,6 +58,8 @@
     cursor: pointer;
     transition: all 500ms;
     filter: grayscale(100%);
+    border-radius: 12px;
+
 }
 .image:hover {
     filter: grayscale(0%);
