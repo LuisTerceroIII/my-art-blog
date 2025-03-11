@@ -5,14 +5,14 @@ import "./globals.css";
 const ptSerif = PT_Serif({weight: ["400", "700"], subsets: ["cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "Lux Ater: arte y filosofía",
-  description: "Lux Ater es un espacio para la reflexión y la creatividad. Explora artículos, pensamientos e ideas sobre la vida, el arte y la filosofía por Luis Espinoza.",
+  title: "Ø - Registros",
+  description: "",
   keywords: ["filosofía", "devenir", "arte", "vida", "pensamiento", "ideas", "reflexión", "creatividad","Luis", "Espinoza", "Luis Espinoza", "Lex Ater","artículos", "opiniones", "pensamientos","reflexionar","inspirar"],
-  metadataBase: new URL('https://luxater.blog'),
+  metadataBase: new URL('https://0-registros.art'),
   authors: [
     {
       name: "Luis Espinoza",
-      url: "https://luisespinozadev.com.ar"
+      url: "https://luisespinozadev.site/"
     }
   ],
   robots: {
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Lux Ater por Luis Espinoza',
-    description: ' Artículos, opiniones, pensamientos, ideas sobre la vida, arte y filosofía por Luis Espinoza',
-    url: 'https://luxater.blog',
-    siteName: 'Lux Ater',
+    title: 'Ø - Registros',
+    description: '',
+    url: 'https://0-registros.art',
+    siteName: 'Ø - Registros',
     locale: 'es_ES',
     type: 'website',
-    images: '/signature.png'
+    images: '/Cero.Vivo.png'
   },
 }
 
