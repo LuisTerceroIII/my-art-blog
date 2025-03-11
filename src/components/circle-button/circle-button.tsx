@@ -13,7 +13,7 @@ interface CircleButtonProps {
 
 export const CircleButton: FC<CircleButtonProps> = (props) => {
 
-	const { onClick, icon = "burgerMenu", containerClasses, color=colors.secondaryPurple } = props
+	const { onClick, icon = "burgerMenu", containerClasses, color="#e8481c" } = props
 
 	return (
 		<div className={`${containerClasses} ${styles.circleButton} pressable`} onClick={onClick} style={{backgroundColor: color}}>

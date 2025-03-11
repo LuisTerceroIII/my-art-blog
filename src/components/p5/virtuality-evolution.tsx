@@ -22,7 +22,7 @@ function setup(p5: any) {
 }
 function draw(p5: any) {
   return () => {
-    p5.background("#390099");
+    p5.background("#e8481c");
     p5.orbitControl();
     p5.rotateY(p5.frameCount * 0.004);
     generateEdges(p5);

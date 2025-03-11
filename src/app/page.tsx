@@ -3,9 +3,11 @@
 import { MainArticlesFeed } from "@/components/main-articles-feed/main-articles-feed";
 import { BackgroundFlowFragtal } from "@/components/p5/index";
 import { colors } from "@/theme/colors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+	const [initialized, setInitialized] = useState(false)
 
 	useEffect(() => {
 		const updateVisitors = async () => {
@@ -17,7 +19,7 @@ export default function Home() {
 					}
 				})
 				res = await res.json()
-				console.log("🚀 ~ updateVisitors ~ res:", res)
+				
 				await fetch('/api/analytics/general/visit-counter', {
 					method: 'POST',
 					body: JSON.stringify({
@@ -40,7 +42,10 @@ export default function Home() {
 				console.log("Error", JSON.stringify(e))
 			}
 		}
-		updateVisitors()
+		if(!initialized) {
+			updateVisitors()
+			setInitialized(true)
+		}
 	}, [])
 
 	return (
