@@ -5,7 +5,7 @@ import "./globals.css";
 const ptSerif = PT_Serif({weight: ["400", "700"], subsets: ["cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "Ø - Registros",
+  title: "Registros",
   description: "",
   keywords: ["filosofía", "devenir", "arte", "vida", "pensamiento", "ideas", "reflexión", "creatividad","Luis", "Espinoza", "Luis Espinoza", "Lex Ater","artículos", "opiniones", "pensamientos","reflexionar","inspirar"],
   metadataBase: new URL('https://0-registros.art'),
